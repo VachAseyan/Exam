@@ -8,5 +8,4 @@ const fetchProducts = async () => {
 
 export {
     fetchProducts,
-    API_URL
 };

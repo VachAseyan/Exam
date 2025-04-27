@@ -10,7 +10,7 @@ function ProductList() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [input, setInput] = useState("");
     const [isBasketMode, setIsBasketMode] = useState(false);
-    const [card, setCard] = useState([]);
+    const [card, setCard] = useState(JSON.parse(localStorage.getItem("card")) ?? [])
     const prevCard = useRef([]);
     const [total, setTotal] = useState(0);
     const { isToggleMode, toggleMode } = useContext(ToggleContext);
@@ -24,6 +24,14 @@ function ProductList() {
 
     useEffect(() => {
         prevCard.current = card;
+    }, [card]);
+
+    useEffect(() => {
+        if (card.length > 0) {
+            localStorage.setItem("card", JSON.stringify(card));
+        } else {
+            localStorage.removeItem("card");
+        }
     }, [card]);
 
     const handleChange = (e) => {
@@ -86,13 +94,11 @@ function ProductList() {
 
     const resetCard = () => {
         setCard(prevCard.current);
-        console.log(card);
-
     };
 
     const deleteAll = () => {
-        setCard([])
-    }
+        setCard([]);
+    };
 
     return (
         <div className={`${style.container} ${isToggleMode ? style.darkMode : ""}`}>
@@ -117,8 +123,7 @@ function ProductList() {
                 </button>
             </div>
             {!isBasketMode ? (
-                <div>
-                    <button onClick={deleteAll}>Delete All</button>
+                <div className={style.productContainer}>
                     {filteredProducts.map((product) => (
                         <Product
                             key={product.id}
@@ -129,7 +134,8 @@ function ProductList() {
                 </div>
             ) : (
                 <div>
-                    <h1>Total Price: {total.toFixed(0)}</h1>
+                    {card.length > 0 && <button onClick={deleteAll}>Delete All</button>}
+                    {card.length > 0 && <h1>Total Price: {total.toFixed(2)}</h1>}
                     <div>
                         {card.map((prod) => (
                             <Card

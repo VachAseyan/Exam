@@ -1,11 +1,14 @@
 import './App.css'
 import ProductList from './components/ProductList/ProductList'
+import { ToggleProvider } from './context/context'
 
 function App() {
 
   return (
     <>
-      <ProductList />
+      <ToggleProvider>
+        <ProductList />
+      </ToggleProvider>
     </>
   )
 }

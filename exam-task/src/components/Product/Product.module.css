@@ -1,0 +1,19 @@
+.productBox {
+    width: 350px;
+    height: 350px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.productBox img {
+    width: 100px;
+    height: 100px;
+}
+
+.darkMode {
+    background-color: #333;
+    color: #fff;
+}

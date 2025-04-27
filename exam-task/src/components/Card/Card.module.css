@@ -1,0 +1,19 @@
+.cardBox {
+    width: 350px;
+    height: 450px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cardBox img {
+    width: 100px;
+    height: 100px;
+}
+
+.darkMode {
+    background-color: #333;
+    color: #fff;
+}
